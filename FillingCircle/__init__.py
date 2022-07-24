@@ -2,6 +2,14 @@ import display
 import random
 from machine import Pin
 from neopixel import NeoPixel
+import buttons
+import mch22
+
+def on_home_btn(pressed):
+    if pressed:
+        mch22.exit_python()
+
+buttons.attach(buttons.BTN_HOME,on_home_btn)
 
 def fillingCircle(color):
     x = 0
