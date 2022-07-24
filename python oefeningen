@@ -1,0 +1,52 @@
+>>> def movingSquare(start,end):
+...     x = start
+...     while x < end:
+...         display.drawFill(0x000000)
+...         display.drawRect(x,70,100,100,1,0x14AF78)
+...         display.flush()
+...         x = x + 2
+
+def fillingCircle(color):
+x = 0
+while x <= 360:
+display.drawFill(0x000000)
+display.drawCircle(160,120,100,0,x,1,color)
+display.flush()
+x = x + 2
+
+clr = random.randrange(0x000000,0xFFFFFF)
+
+import display
+import random
+
+def fillingCircle(color):
+x = 0
+while x <= 360:
+display.drawFill(0x000000)
+display.drawCircle(160,120,100,0,x,1,color)
+display.flush()
+x = x + 2
+
+
+while True:
+clr = random.randrange(0x000000,0xFFFFFF)
+fillingCircle(clr)
+
+def hex2RGB(color):
+	color = hex(color)
+	color = color.lstrip('0').lstrip('x')
+	return tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
+
+def neoPixelInit():
+from machine import Pin
+from neopixel import NeoPixel
+powerPin = Pin(19, Pin.OUT)
+dataPin = Pin(5, Pin.OUT)
+np = NeoPixel(dataPin, 5)
+powerPin.on()
+return np
+
+def neoPixelFill(color,np):
+for pixel in np:
+pixel = color
+np.write()
