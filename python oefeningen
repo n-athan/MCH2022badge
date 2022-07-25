@@ -33,9 +33,9 @@ clr = random.randrange(0x000000,0xFFFFFF)
 fillingCircle(clr)
 
 def hex2RGB(color):
-	color = hex(color)
-	color = color.lstrip('0').lstrip('x')
-	return tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
+color = hex(color)
+color = color.lstrip('0').lstrip('x')
+return tuple(int(color[i:i+2], 16) for i in (0, 2, 4))
 
 def neoPixelInit():
 from machine import Pin
@@ -50,3 +50,20 @@ def neoPixelFill(color,np):
 for pixel in np:
 pixel = color
 np.write()
+
+flag = [0xFF0000,0xFF8800,0xFFFF00,0x00FF00,0x0000FF,0xFF00FF]
+w = display.width()
+h = display.height()
+
+def pride(flag,xoff):
+stripe = int(h/(len(flag)-1))
+x = 0
+while x <= w:
+yprev = 0
+for index in range(1,len(flag)+1):
+yoff = stripe*index-stripe/2
+y = yoff+math.sin((x+xoff)/20)*20
+display.drawLine(x,yprev,x,y,flag[index-1])
+yprev = y
+display.drawLine(x,yprev,x,h,flag[index-1])
+x = x + 1
