@@ -12,7 +12,7 @@ choice = 0
 flags = [
     ["rainbow",["0xFF0000","0xFF8800","0xFFFF00","0x00FF00","0x0000FF","0xFF00FF"]],
     ["trans",["0x63E2EB","0xEB63DF","0xFFFFFF","0xEB63DF","0x63E2EB"]],
-    ["bi",["0xC70A62","0x46068F","0xC920B9","0x46068F","0xC70A62"]],
+    ["bi",["0xC70A62","0xC70A62","0xC920B9","0x46068F","0x46068F"]],
     ["nonbinary",["0xFFFF00","0xFFFFFF","0xAF07F7","0x00000"]],
     ["lesbian",["0xF71F07","0xF77707","0xFFFFFF","0xF7078F","0xD10420"]],
     ["gay",["0x269435","0x39C44C","0x49F560","0xFFFFFF","0x4949F5","0x2F2F9E","0x1F1F63"]]
@@ -55,10 +55,11 @@ def on_B_btn(pressed):
 buttons.attach(buttons.BTN_B,on_B_btn)
 
 def createMenu(flags):
+    global choice
     display.drawFill(0)
     for i in range(0,len(flags)):
         display.drawText(10,10+i*20,flags[i][0])
-    display.drawRect(0,5+choice*20,100,30,0,0xFF0000)
+    display.drawRect(0,5+choice*20,100,20,0,0xFF0000)
     display.flush()
 
 def on_up_btn(pressed):
@@ -73,7 +74,7 @@ buttons.attach(buttons.BTN_UP,on_up_btn)
 def on_down_btn(pressed):
     global choice
     if (pressed):
-        if choice < 0:
+        if choice < len(flags):
             choice = choice + 1
     createMenu(flags)
         
